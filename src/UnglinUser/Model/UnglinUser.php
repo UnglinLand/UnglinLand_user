@@ -31,6 +31,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UnglinUser implements UserInterface
 {
     /**
+     * Identifyer
+     *
+     * This property store the user identifyer.
+     *
+     * @var mixed
+     */
+    private $identifyer;
+
+    /**
      * Password
      *
      * This property store the user password.
@@ -65,6 +74,18 @@ class UnglinUser implements UserInterface
      * @var string
      */
     private $username;
+
+    /**
+     * Get identifyer
+     *
+     * This method return the user identifyer
+     *
+     * @return mixed
+     */
+    public function getIdentifyer()
+    {
+        return $this->identifyer;
+    }
 
     /**
      * Returns the password used to authenticate the user.

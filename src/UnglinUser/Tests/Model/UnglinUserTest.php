@@ -54,6 +54,26 @@ class UnglinUserTest extends TestCase
     }
 
     /**
+     * Test getIdentifyer
+     *
+     * This method is used to validate the getIdentifyer method of UnglinUser class.
+     *
+     * @return void
+     */
+    public function testGetIdentifyer()
+    {
+        $instanceReflection = new \ReflectionProperty(UnglinUser::class, 'identifyer');
+        $instanceReflection->setAccessible(true);
+        $instanceReflection->setValue($this->instance, 'user_id');
+
+        $this->assertEquals(
+            'user_id',
+            $this->instance->getIdentifyer(),
+            'The UnglinUser::getIdentifyer method is expected to return the value stored into the "identifyer" property'
+        );
+    }
+
+    /**
      * Test getPassword
      *
      * This method is used to validate the getPassword method of UnglinUser class.
