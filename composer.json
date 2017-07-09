@@ -9,7 +9,7 @@
 	"authors" : [{
 			"name" : "matthieu88160",
 			"email" : "matthieu.vallance@cscfa.fr",
-			"homepage" : "cscfa.fr",
+			"homepage" : "http://www.cscfa.fr",
 			"role" : "developper"
 		}
 	],
@@ -19,13 +19,16 @@
 		"wiki" : "https://github.com/UnglinLand/UnglinLand_user/wiki",
 		"source" : "https://github.com/UnglinLand/UnglinLand_user"
 	},
-	"name" : "UnglinLand_user",
+	"name" : "unglin-land/unglin-land_user",
 	"description" : "The user module of UnglinLand project",
 	"type" : "library",
 	"license" : "MIT",
 	"autoload" : {
 		"psr-4" : {
-			"UnglinLand\\UserModule" : "src/UnglinUser"
+			"UnglinLand\\UserModule\\" : "src/UnglinUser"
 		}
+	},
+	"require": {
+		"symfony/security-core": "^3.0@stable"
 	}
 }

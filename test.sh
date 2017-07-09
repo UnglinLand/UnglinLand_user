@@ -51,6 +51,9 @@ echo "$TEST_RES" > doc/phpunit.txt
 test "$PHP vendor/bin/phpcs --standard=./csruleset.xml src/" PHPCS 100
 echo "$TEST_RES" > doc/phpcs.txt
 
+test "composer validate" COMPOSER 100
+echo "$TEST_RES" > doc/composer.txt
+
 test "$PHP vendor/bin/phpmd src/ text ./phpmd.xml" PHPMD 100
 echo "$TEST_RES" > doc/phpmd.txt
 
