@@ -63,9 +63,6 @@ echo "$TEST_RES" > doc/phpcpd.txt
 test "$PHP vendor/bin/phpmetrics --report-html=doc/metrics src/" PHPMETRICS 1
 echo "$TEST_RES" > doc/phpmetrics.txt
 
-runner "$PHP vendor/bin/phpcs src/"
-echo "$TEST_RES" > doc/phpcs_all.txt
-
 if [ "$STATUS" -eq 0 ]
 then
     echo -e "\n\e[42m"
