@@ -74,7 +74,7 @@ class UnglinUserManagerTest extends TestCase
         $user = $this->createMock(UnglinUser::class);
 
         $user->expects($this->once())
-            ->method('getIdentifyer')
+            ->method('getId')
             ->willReturn('123');
 
         $logger->expects($this->once())

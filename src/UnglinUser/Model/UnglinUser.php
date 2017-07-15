@@ -31,13 +31,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UnglinUser implements UserInterface
 {
     /**
-     * Identifyer
+     * Id
      *
      * This property store the user identifyer.
      *
      * @var mixed
      */
-    private $identifyer;
+    private $id;
 
     /**
      * Password
@@ -76,15 +76,15 @@ class UnglinUser implements UserInterface
     private $username;
 
     /**
-     * Get identifyer
+     * Get id
      *
      * This method return the user identifyer
      *
      * @return mixed
      */
-    public function getIdentifyer()
+    public function getId()
     {
-        return $this->identifyer;
+        return $this->id;
     }
 
     /**

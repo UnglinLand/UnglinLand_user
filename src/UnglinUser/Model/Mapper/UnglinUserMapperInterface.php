@@ -53,7 +53,7 @@ interface UnglinUserMapperInterface
     public function save(UnglinUser $user) : void ;
 
     /**
-     * Find one by identifyer
+     * Find one by id
      *
      * This method return an user instance, accordingly with it identifyer. Can return null if no
      * one user match the given identifyer.
@@ -62,5 +62,5 @@ interface UnglinUserMapperInterface
      *
      * @return UnglinUser|NULL
      */
-    public function findOneByIdentifyer($identifyer) : ?UnglinUser ;
+    public function findOneById($identifyer) : ?UnglinUser ;
 }

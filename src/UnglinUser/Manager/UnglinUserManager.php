@@ -92,7 +92,7 @@ class UnglinUserManager implements UnglinUserManagerInterface
      */
     public function saveUser(UnglinUser $user) : void
     {
-        $this->logger->debug(sprintf('Saving user with identifyer "%s"', $user->getIdentifyer()));
+        $this->logger->debug(sprintf('Saving user with identifyer "%s"', $user->getId()));
 
         $this->userMapper->persist($user);
         $this->userMapper->save($user);
