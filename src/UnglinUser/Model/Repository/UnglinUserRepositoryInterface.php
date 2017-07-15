@@ -26,6 +26,6 @@ namespace UnglinLand\UserModule\Model\Repository;
  * @license  MIT <https://opensource.org/licenses/MIT>
  * @link     http://cscfa.fr
  */
-interface UnglinUserRepository
+interface UnglinUserRepositoryInterface
 {
 }
