@@ -113,7 +113,7 @@ class UnglinUserManager implements UnglinUserManagerInterface
     {
         $this->logger->debug(sprintf('Loading user with identifyer "%s"', $identifyer));
 
-        $user = $this->userMapper->findOneByIdentifyer($identifyer);
+        $user = $this->userMapper->findOneById($identifyer);
 
         if (!$user) {
             $this->logger->info(sprintf('Unable to load user with identifyer "%s"', $identifyer));

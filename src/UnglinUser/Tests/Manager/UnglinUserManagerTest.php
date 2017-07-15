@@ -130,7 +130,7 @@ class UnglinUserManagerTest extends TestCase
             ->with($this->stringEndsWith('"123"'));
 
         $mapper->expects($this->once())
-            ->method('findOneByIdentifyer')
+            ->method('findOneById')
             ->with($this->equalTo('123'))
             ->willReturn($user);
 
@@ -160,7 +160,7 @@ class UnglinUserManagerTest extends TestCase
             ->with($this->stringEndsWith('"123"'));
 
         $mapper->expects($this->once())
-            ->method('findOneByIdentifyer')
+            ->method('findOneById')
             ->with($this->equalTo('123'))
             ->willReturn(null);
 
