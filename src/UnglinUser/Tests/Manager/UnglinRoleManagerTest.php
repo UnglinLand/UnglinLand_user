@@ -35,45 +35,45 @@ use UnglinLand\UserModule\Model\UnglinRole;
 class UnglinRoleManagerTest extends TestCase
 {
     /**
-     * Test createRole
+     * Test createInstance
      *
-     * This method validate the createRole method of the UnglinRoleManager instance
+     * This method validate the createInstance method of the UnglinRoleManager instance
      *
      * @return void
      */
-    public function testCreateRole()
+    public function testCreateInstance()
     {
         $logger = $this->createMock(LoggerInterface::class);
         $mapper = $this->createMock(UnglinRoleMapperInterface::class);
 
         $instance = new UnglinRoleManager($mapper, $logger);
 
-        $user = $instance->createRole();
+        $user = $instance->createInstance();
 
         $this->assertInstanceOf(
             UnglinRole::class,
             $user,
-            'The UnglinRoleManager::createRole is expected to return an instance of UnglinRole'
+            'The UnglinRoleManager::createInstance is expected to return an instance of UnglinRole'
         );
     }
 
     /**
-     * Test saveRole
+     * Test save
      *
-     * This method validate the saveRole method of the UnglinRoleManager instance
+     * This method validate the save method of the UnglinRoleManager instance
      *
      * @return void
      */
-    public function testSaveRole()
+    public function testSave()
     {
         $logger = $this->createMock(LoggerInterface::class);
         $mapper = $this->createMock(UnglinRoleMapperInterface::class);
 
         $instance = new UnglinRoleManager($mapper, $logger);
 
-        $user = $this->createMock(UnglinRole::class);
+        $role = $this->createMock(UnglinRole::class);
 
-        $user->expects($this->once())
+        $role->expects($this->once())
             ->method('getId')
             ->willReturn('123');
 
@@ -83,22 +83,22 @@ class UnglinRoleManagerTest extends TestCase
 
         $mapper->expects($this->once())
             ->method('persist')
-            ->with($this->identicalTo($user));
+            ->with($this->identicalTo($role));
         $mapper->expects($this->once())
             ->method('save')
-            ->with($this->identicalTo($user));
+            ->with($this->identicalTo($role));
 
-        $this->assertNull($instance->saveRole($user));
+        $this->assertNull($instance->save($role));
     }
 
     /**
-     * Test saveRole with TypeError
+     * Test save with TypeError
      *
-     * This method validate the type hint of the saveRole of the UnglinRoleManager instance
+     * This method validate the type hint of the save of the UnglinRoleManager instance
      *
      * @return void
      */
-    public function testSaveRoleTypeError()
+    public function testSaveTypeError()
     {
         $this->expectException(\TypeError::class);
         $logger = $this->createMock(LoggerInterface::class);
@@ -106,17 +106,17 @@ class UnglinRoleManagerTest extends TestCase
 
         $instance = new UnglinRoleManager($mapper, $logger);
 
-        $this->assertNull($instance->saveRole(new \stdClass()));
+        $this->assertNull($instance->save(new \stdClass()));
     }
 
     /**
-     * Test loadRole
+     * Test load
      *
-     * This method validate the loadRole method of the UnglinRoleManager instance
+     * This method validate the load method of the UnglinRoleManager instance
      *
      * @return void
      */
-    public function testLoadRole()
+    public function testLoad()
     {
         $logger = $this->createMock(LoggerInterface::class);
         $mapper = $this->createMock(UnglinRoleMapperInterface::class);
@@ -134,18 +134,18 @@ class UnglinRoleManagerTest extends TestCase
             ->with($this->equalTo('123'))
             ->willReturn($user);
 
-        $this->assertSame($user, $instance->loadRole('123'));
+        $this->assertSame($user, $instance->loadById('123'));
     }
 
     /**
-     * Test loadRole if failure
+     * Test load if failure
      *
-     * This method validate the loadRole method of the UnglinRoleManager instance when the mapper is not
+     * This method validate the load method of the UnglinRoleManager instance when the mapper is not
      * able to load an user, accordingly with the given identifyer
      *
      * @return void
      */
-    public function testLoadRoleFailure()
+    public function testLoadFailure()
     {
         $logger = $this->createMock(LoggerInterface::class);
         $mapper = $this->createMock(UnglinRoleMapperInterface::class);
@@ -164,6 +164,6 @@ class UnglinRoleManagerTest extends TestCase
             ->with($this->equalTo('123'))
             ->willReturn(null);
 
-        $this->assertNull($instance->loadRole('123'));
+        $this->assertNull($instance->loadById('123'));
     }
 }

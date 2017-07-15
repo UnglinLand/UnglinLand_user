@@ -15,7 +15,7 @@
  */
 namespace UnglinLand\UserModule\Manager;
 
-use UnglinLand\UserModule\Manager\UnglinRoleManagerInterface;
+use UnglinLand\UserModule\Manager\UnglinManagerInterface;
 use UnglinLand\UserModule\Model\UnglinRole;
 use UnglinLand\UserModule\Model\Mapper\UnglinRoleMapperInterface;
 use Psr\Log\LoggerInterface;
@@ -31,7 +31,7 @@ use Psr\Log\LoggerInterface;
  * @license  MIT <https://opensource.org/licenses/MIT>
  * @link     http://cscfa.fr
  */
-class UnglinRoleManager implements UnglinRoleManagerInterface
+class UnglinRoleManager implements UnglinManagerInterface
 {
     /**
      * Role mapper
@@ -74,7 +74,7 @@ class UnglinRoleManager implements UnglinRoleManagerInterface
      *
      * @return UnglinRole
      */
-    public function createRole() : UnglinRole
+    public function createInstance()
     {
         $this->logger->debug('Creating empty role');
 
@@ -90,8 +90,18 @@ class UnglinRoleManager implements UnglinRoleManagerInterface
      *
      * @return void
      */
-    public function saveRole(UnglinRole $role) : void
+    public function save($role) : void
     {
+        if (!$role instanceof UnglinRole) {
+            throw new \TypeError(
+                sprintf(
+                    'Expected %s. %s given',
+                    UnglinRole::class,
+                    is_object($role) ? get_class($role) : gettype($role)
+                )
+            );
+        }
+
         $this->logger->debug(sprintf('Saving role with identifyer "%s"', $role->getId()));
 
         $this->roleMapper->persist($role);
@@ -101,7 +111,7 @@ class UnglinRoleManager implements UnglinRoleManagerInterface
     }
 
     /**
-     * Load role
+     * Load by id
      *
      * This method load an role instance accordingly with it identifyer
      *
@@ -109,7 +119,7 @@ class UnglinRoleManager implements UnglinRoleManagerInterface
      *
      * @return UnglinRole|NULL
      */
-    public function loadRole($identifyer) : ?UnglinRole
+    public function loadById($identifyer)
     {
         $this->logger->debug(sprintf('Loading role with identifyer "%s"', $identifyer));
 

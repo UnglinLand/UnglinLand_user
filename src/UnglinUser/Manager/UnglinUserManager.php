@@ -15,7 +15,7 @@
  */
 namespace UnglinLand\UserModule\Manager;
 
-use UnglinLand\UserModule\Manager\UnglinUserManagerInterface;
+use UnglinLand\UserModule\Manager\UnglinManagerInterface;
 use UnglinLand\UserModule\Model\UnglinUser;
 use UnglinLand\UserModule\Model\Mapper\UnglinUserMapperInterface;
 use Psr\Log\LoggerInterface;
@@ -31,7 +31,7 @@ use Psr\Log\LoggerInterface;
  * @license  MIT <https://opensource.org/licenses/MIT>
  * @link     http://cscfa.fr
  */
-class UnglinUserManager implements UnglinUserManagerInterface
+class UnglinUserManager implements UnglinManagerInterface
 {
     /**
      * User mapper
@@ -74,7 +74,7 @@ class UnglinUserManager implements UnglinUserManagerInterface
      *
      * @return UnglinUser
      */
-    public function createUser() : UnglinUser
+    public function createInstance()
     {
         $this->logger->debug('Creating empty user');
 
@@ -90,8 +90,18 @@ class UnglinUserManager implements UnglinUserManagerInterface
      *
      * @return void
      */
-    public function saveUser(UnglinUser $user) : void
+    public function save($user) : void
     {
+        if (!$user instanceof UnglinUser) {
+            throw new \TypeError(
+                sprintf(
+                    'Expected %s. %s given',
+                    UnglinUser::class,
+                    is_object($user) ? get_class($user) : gettype($user)
+                )
+            );
+        }
+
         $this->logger->debug(sprintf('Saving user with identifyer "%s"', $user->getId()));
 
         $this->userMapper->persist($user);
@@ -101,7 +111,7 @@ class UnglinUserManager implements UnglinUserManagerInterface
     }
 
     /**
-     * Load user
+     * Load by id
      *
      * This method load an user instance accordingly with it identifyer
      *
@@ -109,7 +119,7 @@ class UnglinUserManager implements UnglinUserManagerInterface
      *
      * @return UnglinUser|NULL
      */
-    public function loadUser($identifyer) : ?UnglinUser
+    public function loadById($identifyer)
     {
         $this->logger->debug(sprintf('Loading user with identifyer "%s"', $identifyer));
 

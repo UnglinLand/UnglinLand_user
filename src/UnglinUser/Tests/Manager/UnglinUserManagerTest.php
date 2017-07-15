@@ -35,25 +35,25 @@ use UnglinLand\UserModule\Model\UnglinUser;
 class UnglinUserManagerTest extends TestCase
 {
     /**
-     * Test createUser
+     * Test createInstance
      *
-     * This method validate the createUser method of the UnglinUserManager instance
+     * This method validate the createInstance method of the UnglinUserManager instance
      *
      * @return void
      */
-    public function testCreateUser()
+    public function testCreateInstance()
     {
         $logger = $this->createMock(LoggerInterface::class);
         $mapper = $this->createMock(UnglinUserMapperInterface::class);
 
         $instance = new UnglinUserManager($mapper, $logger);
 
-        $user = $instance->createUser();
+        $user = $instance->createInstance();
 
         $this->assertInstanceOf(
             UnglinUser::class,
             $user,
-            'The UnglinUserManager::createUser is expected to return an instance of UnglinUser'
+            'The UnglinUserManager::createInstance is expected to return an instance of UnglinUser'
         );
     }
 
@@ -88,7 +88,7 @@ class UnglinUserManagerTest extends TestCase
             ->method('save')
             ->with($this->identicalTo($user));
 
-        $this->assertNull($instance->saveUser($user));
+        $this->assertNull($instance->save($user));
     }
 
     /**
@@ -106,7 +106,7 @@ class UnglinUserManagerTest extends TestCase
 
         $instance = new UnglinUserManager($mapper, $logger);
 
-        $this->assertNull($instance->saveUser(new \stdClass()));
+        $this->assertNull($instance->save(new \stdClass()));
     }
 
     /**
@@ -134,7 +134,7 @@ class UnglinUserManagerTest extends TestCase
             ->with($this->equalTo('123'))
             ->willReturn($user);
 
-        $this->assertSame($user, $instance->loadUser('123'));
+        $this->assertSame($user, $instance->loadById('123'));
     }
 
     /**
@@ -164,6 +164,6 @@ class UnglinUserManagerTest extends TestCase
             ->with($this->equalTo('123'))
             ->willReturn(null);
 
-        $this->assertNull($instance->loadUser('123'));
+        $this->assertNull($instance->loadById('123'));
     }
 }
