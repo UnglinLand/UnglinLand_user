@@ -4,7 +4,10 @@
 		"phpmd/phpmd" : "^2.6@stable",
 		"squizlabs/php_codesniffer" : "^3.0@stable",
 		"sebastian/phpcpd" : "^3.0@stable",
-		"phpmetrics/phpmetrics" : "^2.2@stable"
+		"phpmetrics/phpmetrics" : "^2.2@stable",
+		"doctrine/orm": "^2.5@stable",
+		"alcaeus/mongo-php-adapter": "^1.1@stable",
+		"doctrine/mongodb-odm": "^1.1@stable"
 	},
 	"authors" : [{
 			"name" : "matthieu88160",
@@ -30,5 +33,10 @@
 	},
 	"require": {
 		"symfony/security-core": "^3.0@stable"
+	},
+	"suggest" : {
+		"doctrine/orm" : "For user mapping over doctrine orm",
+		"alcaeus/mongo-php-adapter": "For user mapping over doctrine odm on php7",
+		"doctrine/mongodb-odm": "For user mapping over doctrine odm"
 	}
 }
