@@ -15,10 +15,7 @@
  */
 namespace UnglinLand\UserModule\Manager;
 
-use UnglinLand\UserModule\Manager\UnglinManagerInterface;
 use UnglinLand\UserModule\Model\UnglinRole;
-use UnglinLand\UserModule\Model\Mapper\UnglinRoleMapperInterface;
-use Psr\Log\LoggerInterface;
 
 /**
  * UnglinRoleManager
@@ -31,124 +28,34 @@ use Psr\Log\LoggerInterface;
  * @license  MIT <https://opensource.org/licenses/MIT>
  * @link     http://cscfa.fr
  */
-class UnglinRoleManager implements UnglinManagerInterface
+class UnglinRoleManager extends GenericUnglinManager
 {
     /**
-     * Role mapper
+     * Get instance id
      *
-     * This property store the role mapper
+     * Return the managed instance id
      *
-     * @var UnglinRoleMapperInterface
+     * @param mixed $instance The managed instance
+     *
+     * @return mixed
      */
-    private $roleMapper;
-
-    /**
-     * Logger
-     *
-     * This property store the application logger
-     *
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * Construct
-     *
-     * The default UnglinRoleManager constructor.
-     *
-     * @param UnglinRoleMapperInterface $roleMapper The UnglinRole mapper
-     * @param LoggerInterface           $logger     The application logger
-     *
-     * @return void
-     */
-    public function __construct(UnglinRoleMapperInterface $roleMapper, LoggerInterface $logger)
+    protected function getInstanceId($instance)
     {
-        $this->roleMapper = $roleMapper;
-        $this->logger = $logger;
-    }
-
-    /**
-     * Create role
-     *
-     * This method create a new instance of role and return it.
-     *
-     * @return UnglinRole
-     */
-    public function createInstance()
-    {
-        $this->logger->debug('Creating empty role');
-
-        return new UnglinRole();
-    }
-
-    /**
-     * Save role
-     *
-     * This method save a role instance.
-     *
-     * @param UnglinRole $role The role to save
-     *
-     * @return void
-     */
-    public function save($role) : void
-    {
-        if (!$role instanceof UnglinRole) {
-            throw new \TypeError(
-                sprintf(
-                    'Expected %s. %s given',
-                    UnglinRole::class,
-                    is_object($role) ? get_class($role) : gettype($role)
-                )
-            );
+        if ($instance instanceof UnglinRole) {
+            return $instance->getId();
         }
-
-        $this->logger->debug(sprintf('Saving role with identifyer "%s"', $role->getId()));
-
-        $this->roleMapper->persist($role);
-        $this->roleMapper->save($role);
-
-        return;
+        return '';
     }
 
     /**
-     * Load by id
+     * Get managed instance
      *
-     * This method load an role instance accordingly with it identifyer
+     * This method return the managed class name.
      *
-     * @param mixed $identifyer The role identifyer
-     *
-     * @return UnglinRole|NULL
+     * @return string
      */
-    public function loadById($identifyer)
+    protected function getManagedClass() : string
     {
-        $this->logger->debug(sprintf('Loading role with identifyer "%s"', $identifyer));
-
-        $role = $this->roleMapper->findOneById($identifyer);
-
-        if (!$role) {
-            $this->logger->info(sprintf('Unable to load role with identifyer "%s"', $identifyer));
-            return null;
-        }
-
-        return $role;
-    }
-
-    /**
-     * Delete
-     *
-     * This method remove a managed instance from the storage
-     *
-     * @param mixed $instance The instance to remove
-     *
-     * @return void
-     */
-    public function delete($instance) : void
-    {
-        $identifyer = $instance instanceof UnglinRole ? $instance->getId() : '';
-
-        $this->logger->debug(sprintf('Deleting role with identifyer "%s"', $identifyer));
-
-        $this->roleMapper->delete($instance);
-        return;
+        return UnglinRole::class;
     }
 }
