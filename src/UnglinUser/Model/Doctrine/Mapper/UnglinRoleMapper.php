@@ -123,6 +123,7 @@ class UnglinRoleMapper implements UnglinRoleMapperInterface
     public function delete($instance) : void
     {
         $this->manager->remove($instance);
+        $this->save($instance);
         return;
     }
 }
