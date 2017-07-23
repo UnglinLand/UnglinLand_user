@@ -28,50 +28,6 @@ use UnglinLand\UserModule\Model\UnglinRole;
  * @license  MIT <https://opensource.org/licenses/MIT>
  * @link     http://cscfa.fr
  */
-interface UnglinRoleMapperInterface
+interface UnglinRoleMapperInterface extends UnglinMapperInterface
 {
-    /**
-     * Persist
-     *
-     * This method persist a role instance.
-     *
-     * @param UnglinRole $role The role to persist
-     *
-     * @return void
-     */
-    public function persist(UnglinRole $role) : void ;
-
-    /**
-     * Save
-     *
-     * This method save a role instance.
-     *
-     * @param UnglinRole $role The role to save
-     *
-     * @return void
-     */
-    public function save(UnglinRole $role) : void ;
-
-    /**
-     * Find one by id
-     *
-     * This method return a role instance, accordingly with it identifyer. Can return null if no
-     * one role match the given identifyer.
-     *
-     * @param mixed $identifyer The role identifyer
-     *
-     * @return UnglinRole|NULL
-     */
-    public function findOneById($identifyer) : ?UnglinRole ;
-
-    /**
-     * Delete
-     *
-     * This method delete a role instance.
-     *
-     * @param UnglinRole $role The role to delete
-     *
-     * @return void
-     */
-    public function delete(UnglinRole $role) : void ;
 }

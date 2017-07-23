@@ -15,10 +15,9 @@
  */
 namespace UnglinLand\UserModule\Model\Doctrine\Mapper;
 
-use UnglinLand\UserModule\Model\Mapper\UnglinRoleMapperInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use UnglinLand\UserModule\Model\Mapper\UnglinRoleMapperInterface;
 use UnglinLand\UserModule\Model\Repository\UnglinRoleRepositoryInterface;
-use UnglinLand\UserModule\Model\UnglinRole;
 
 /**
  * Unglin role mapper
@@ -70,14 +69,14 @@ class UnglinRoleMapper implements UnglinRoleMapperInterface
     /**
      * Find one by id
      *
-     * This method return a role instance, accordingly with it identifyer. Can return null if no
-     * one role match the given identifyer.
+     * This method return an instance, accordingly with it identifyer. Can return null if no
+     * one instance match the given identifyer.
      *
-     * @param mixed $identifyer The role identifyer
+     * @param mixed $identifyer The instance identifyer
      *
-     * @return UnglinRole|NULL
+     * @return mixed|NULL
      */
-    public function findOneById($identifyer) : ?UnglinRole
+    public function findOneById($identifyer)
     {
         return $this->repository->findOneById($identifyer);
     }
@@ -85,45 +84,45 @@ class UnglinRoleMapper implements UnglinRoleMapperInterface
     /**
      * Save
      *
-     * This method save a role instance.
+     * This method save an instance.
      *
-     * @param UnglinRole $role The role to save
+     * @param miced $instance The instance to save
      *
      * @return void
      */
-    public function save(UnglinRole $role) : void
+    public function save($instance) : void
     {
-        $this->manager->flush($role);
+        $this->manager->flush($instance);
         return;
     }
 
     /**
      * Persist
      *
-     * This method persist a role instance.
+     * This method persist an instance.
      *
-     * @param UnglinRole $role The role to persist
+     * @param mixed $instance The instance to persist
      *
      * @return void
      */
-    public function persist(UnglinRole $role) : void
+    public function persist($instance) : void
     {
-        $this->manager->persist($role);
+        $this->manager->persist($instance);
         return;
     }
 
     /**
      * Delete
      *
-     * This method delete a role instance.
+     * This method delete an instance.
      *
-     * @param UnglinRole $role The role to delete
+     * @param mixed $instance The instance to delete
      *
      * @return void
      */
-    public function delete(UnglinRole $role) : void
+    public function delete($instance) : void
     {
-        $this->manager->remove($role);
+        $this->manager->remove($instance);
         return;
     }
 }

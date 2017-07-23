@@ -154,17 +154,17 @@ class UnglinRoleManagerTest extends TestCase
 
         $logger->expects($this->once())
             ->method('debug')
-            ->with($this->stringEndsWith('"123"'));
+            ->with($this->stringEndsWith('"234"'));
         $logger->expects($this->once())
             ->method('info')
-            ->with($this->stringEndsWith('"123"'));
+            ->with($this->stringEndsWith('"234"'));
 
         $mapper->expects($this->once())
             ->method('findOneById')
-            ->with($this->equalTo('123'))
+            ->with($this->equalTo('234'))
             ->willReturn(null);
 
-        $this->assertNull($instance->loadById('123'));
+        $this->assertNull($instance->loadById('234'));
     }
 
     /**
