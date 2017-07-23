@@ -103,4 +103,27 @@ class UnglinRoleMapperTest extends TestCase
 
         $this->assertNull($instance->persist($role));
     }
+
+    /**
+     * Test delete
+     *
+     * This method validate the UnglinRoleMapper::delete method logic
+     *
+     * @return void
+     */
+    public function testDelete()
+    {
+        $objectManager = $this->createMock(ObjectManager::class);
+        $repository = $this->createMock(UnglinRoleRepositoryInterface::class);
+
+        $instance = new UnglinRoleMapper($objectManager, $repository);
+
+        $role = $this->createMock(UnglinRole::class);
+
+        $objectManager->expects($this->once())
+            ->method('remove')
+            ->with($this->identicalTo($role));
+
+        $this->assertNull($instance->delete($role));
+    }
 }

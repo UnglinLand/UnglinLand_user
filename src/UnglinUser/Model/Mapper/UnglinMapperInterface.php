@@ -7,64 +7,67 @@
  *
  * PHP version 7.2
  *
- * @category Manager
+ * @category Mapper
  * @package  UnglinLand_User
  * @author   matthieu vallance <matthieu.vallance@cscfa.fr>
  * @license  MIT <https://opensource.org/licenses/MIT>
  * @link     http://cscfa.fr
  */
-namespace UnglinLand\UserModule\Manager;
+namespace UnglinLand\UserModule\Model\Mapper;
 
 /**
- * UnglinLand manager interface
+ * Unglin mapper interface
  *
- * This interface define the base manager methods
+ * This interface define the base Unglin mapper methods
  *
- * @category Manager
+ * @category Mapper
  * @package  UnglinLand_User
  * @author   matthieu vallance <matthieu.vallance@cscfa.fr>
  * @license  MIT <https://opensource.org/licenses/MIT>
  * @link     http://cscfa.fr
  */
-interface UnglinManagerInterface
+interface UnglinMapperInterface
 {
     /**
-     * Create instance
+     * Persist
      *
-     * This method create a new instance of managed object and return it.
+     * This method persist an instance.
      *
-     * @return mixed
+     * @param mixed $instance The instance to persist
+     *
+     * @return void
      */
-    public function createInstance();
+    public function persist($instance) : void ;
 
     /**
      * Save
      *
-     * This method save a managed instance.
+     * This method save an instance.
      *
-     * @param mixed $instance The instance to save
+     * @param miced $instance The instance to save
      *
      * @return void
      */
     public function save($instance) : void ;
 
     /**
-     * Load by id
+     * Find one by id
      *
-     * This method load a managed instance accordingly with it identifyer
+     * This method return an instance, accordingly with it identifyer. Can return null if no
+     * one instance match the given identifyer.
      *
      * @param mixed $identifyer The instance identifyer
      *
      * @return mixed|NULL
      */
-    public function loadById($identifyer);
+    public function findOneById($identifyer);
 
     /**
      * Delete
      *
-     * This method remove a managed instance from the storage
+     * This method delete an instance.
      *
-     * @param mixed $instance The instance to remove
+     * @param mixed $instance The instance to delete
      *
      * @return void
      */

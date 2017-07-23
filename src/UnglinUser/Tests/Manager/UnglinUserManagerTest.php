@@ -15,9 +15,7 @@
  */
 namespace UnglinLand\UserModule\Tests\Manager;
 
-use PHPUnit\Framework\TestCase;
 use UnglinLand\UserModule\Manager\UnglinUserManager;
-use Psr\Log\LoggerInterface;
 use UnglinLand\UserModule\Model\Mapper\UnglinUserMapperInterface;
 use UnglinLand\UserModule\Model\UnglinUser;
 
@@ -32,138 +30,41 @@ use UnglinLand\UserModule\Model\UnglinUser;
  * @license  MIT <https://opensource.org/licenses/MIT>
  * @link     http://cscfa.fr
  */
-class UnglinUserManagerTest extends TestCase
+class UnglinUserManagerTest extends AbstractManagerTest
 {
     /**
-     * Test createInstance
+     * Get tested instance
      *
-     * This method validate the createInstance method of the UnglinUserManager instance
+     * This method return the tested instance class
      *
-     * @return void
+     * @return string
      */
-    public function testCreateInstance()
+    protected function getTestedClass() : string
     {
-        $logger = $this->createMock(LoggerInterface::class);
-        $mapper = $this->createMock(UnglinUserMapperInterface::class);
-
-        $instance = new UnglinUserManager($mapper, $logger);
-
-        $user = $instance->createInstance();
-
-        $this->assertInstanceOf(
-            UnglinUser::class,
-            $user,
-            'The UnglinUserManager::createInstance is expected to return an instance of UnglinUser'
-        );
+        return UnglinUserManager::class;
     }
 
     /**
-     * Test saveUser
+     * Get managed class
      *
-     * This method validate the saveUser method of the UnglinUserManager instance
+     * This method return the managed class
      *
-     * @return void
+     * @return string
      */
-    public function testSaveUser()
+    protected function getManagedClass() : string
     {
-        $logger = $this->createMock(LoggerInterface::class);
-        $mapper = $this->createMock(UnglinUserMapperInterface::class);
-
-        $instance = new UnglinUserManager($mapper, $logger);
-
-        $user = $this->createMock(UnglinUser::class);
-
-        $user->expects($this->once())
-            ->method('getId')
-            ->willReturn('123');
-
-        $logger->expects($this->once())
-            ->method('debug')
-            ->with($this->stringEndsWith('"123"'));
-
-        $mapper->expects($this->once())
-            ->method('persist')
-            ->with($this->identicalTo($user));
-        $mapper->expects($this->once())
-            ->method('save')
-            ->with($this->identicalTo($user));
-
-        $this->assertNull($instance->save($user));
+        return UnglinUser::class;
     }
 
     /**
-     * Test saveUser with TypeError
+     * Get mapper class
      *
-     * This method validate the type hint of the saveUser of the UnglinUserManager instance
+     * This method return the mapper class
      *
-     * @return void
+     * @return string
      */
-    public function testSaveUserTypeError()
+    protected function getMapperClass() : string
     {
-        $this->expectException(\TypeError::class);
-        $logger = $this->createMock(LoggerInterface::class);
-        $mapper = $this->createMock(UnglinUserMapperInterface::class);
-
-        $instance = new UnglinUserManager($mapper, $logger);
-
-        $this->assertNull($instance->save(new \stdClass()));
-    }
-
-    /**
-     * Test loadUser
-     *
-     * This method validate the loadUser method of the UnglinUserManager instance
-     *
-     * @return void
-     */
-    public function testLoadUser()
-    {
-        $logger = $this->createMock(LoggerInterface::class);
-        $mapper = $this->createMock(UnglinUserMapperInterface::class);
-
-        $instance = new UnglinUserManager($mapper, $logger);
-
-        $user = $this->createMock(UnglinUser::class);
-
-        $logger->expects($this->once())
-            ->method('debug')
-            ->with($this->stringEndsWith('"123"'));
-
-        $mapper->expects($this->once())
-            ->method('findOneById')
-            ->with($this->equalTo('123'))
-            ->willReturn($user);
-
-        $this->assertSame($user, $instance->loadById('123'));
-    }
-
-    /**
-     * Test loadUser if failure
-     *
-     * This method validate the loadUser method of the UnglinUserManager instance when the mapper is not
-     * able to load an user, accordingly with the given identifyer
-     *
-     * @return void
-     */
-    public function testLoadUserFailure()
-    {
-        $logger = $this->createMock(LoggerInterface::class);
-        $mapper = $this->createMock(UnglinUserMapperInterface::class);
-
-        $instance = new UnglinUserManager($mapper, $logger);
-
-        $logger->expects($this->once())
-            ->method('debug')
-            ->with($this->stringEndsWith('"123"'));
-        $logger->expects($this->once())
-            ->method('info')
-            ->with($this->stringEndsWith('"123"'));
-
-        $mapper->expects($this->once())
-            ->method('findOneById')
-            ->with($this->equalTo('123'))
-            ->willReturn(null);
-
-        $this->assertNull($instance->loadById('123'));
+        return UnglinUserMapperInterface::class;
     }
 }

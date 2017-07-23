@@ -15,10 +15,7 @@
  */
 namespace UnglinLand\UserModule\Manager;
 
-use UnglinLand\UserModule\Manager\UnglinManagerInterface;
 use UnglinLand\UserModule\Model\UnglinUser;
-use UnglinLand\UserModule\Model\Mapper\UnglinUserMapperInterface;
-use Psr\Log\LoggerInterface;
 
 /**
  * UnglinUserManager
@@ -31,105 +28,34 @@ use Psr\Log\LoggerInterface;
  * @license  MIT <https://opensource.org/licenses/MIT>
  * @link     http://cscfa.fr
  */
-class UnglinUserManager implements UnglinManagerInterface
+class UnglinUserManager extends GenericUnglinManager
 {
     /**
-     * User mapper
+     * Get instance id
      *
-     * This property store the user mapper
+     * Return the managed instance id
      *
-     * @var UnglinUserMapperInterface
+     * @param mixed $instance The managed instance
+     *
+     * @return mixed
      */
-    private $userMapper;
-
-    /**
-     * Logger
-     *
-     * This property store the application logger
-     *
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * Construct
-     *
-     * The default UnglinUserManager constructor.
-     *
-     * @param UnglinUserMapperInterface $userMapper The UnglinUser mapper
-     * @param LoggerInterface           $logger     The application logger
-     *
-     * @return void
-     */
-    public function __construct(UnglinUserMapperInterface $userMapper, LoggerInterface $logger)
+    protected function getInstanceId($instance)
     {
-        $this->userMapper = $userMapper;
-        $this->logger = $logger;
-    }
-
-    /**
-     * Create user
-     *
-     * This method create a new instance of user and return it.
-     *
-     * @return UnglinUser
-     */
-    public function createInstance()
-    {
-        $this->logger->debug('Creating empty user');
-
-        return new UnglinUser();
-    }
-
-    /**
-     * Save user
-     *
-     * This method save a user instance.
-     *
-     * @param UnglinUser $user The user to save
-     *
-     * @return void
-     */
-    public function save($user) : void
-    {
-        if (!$user instanceof UnglinUser) {
-            throw new \TypeError(
-                sprintf(
-                    'Expected %s. %s given',
-                    UnglinUser::class,
-                    is_object($user) ? get_class($user) : gettype($user)
-                )
-            );
+        if ($instance instanceof UnglinUser) {
+            return $instance->getId();
         }
-
-        $this->logger->debug(sprintf('Saving user with identifyer "%s"', $user->getId()));
-
-        $this->userMapper->persist($user);
-        $this->userMapper->save($user);
-
-        return;
+        return '';
     }
 
     /**
-     * Load by id
+     * Get managed instance
      *
-     * This method load an user instance accordingly with it identifyer
+     * This method return the managed class name.
      *
-     * @param mixed $identifyer The user identifyer
-     *
-     * @return UnglinUser|NULL
+     * @return string
      */
-    public function loadById($identifyer)
+    protected function getManagedClass() : string
     {
-        $this->logger->debug(sprintf('Loading user with identifyer "%s"', $identifyer));
-
-        $user = $this->userMapper->findOneById($identifyer);
-
-        if (!$user) {
-            $this->logger->info(sprintf('Unable to load user with identifyer "%s"', $identifyer));
-            return null;
-        }
-
-        return $user;
+        return UnglinUser::class;
     }
 }
