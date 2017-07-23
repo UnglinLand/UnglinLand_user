@@ -166,4 +166,35 @@ class UnglinRoleManagerTest extends TestCase
 
         $this->assertNull($instance->loadById('123'));
     }
+
+    /**
+     * Test delete
+     *
+     * This method validate the delete method of the UnglinRoleManager instance
+     *
+     * @return void
+     */
+    public function testDelete()
+    {
+        $logger = $this->createMock(LoggerInterface::class);
+        $mapper = $this->createMock(UnglinRoleMapperInterface::class);
+
+        $instance = new UnglinRoleManager($mapper, $logger);
+
+        $role = $this->createMock(UnglinRole::class);
+
+        $role->expects($this->once())
+            ->method('getId')
+            ->willReturn('123');
+
+        $logger->expects($this->once())
+            ->method('debug')
+            ->with($this->stringEndsWith('"123"'));
+
+        $mapper->expects($this->once())
+            ->method('delete')
+            ->with($this->identicalTo($role));
+
+        $this->assertNull($instance->delete($role));
+    }
 }

@@ -63,4 +63,15 @@ interface UnglinUserMapperInterface
      * @return UnglinUser|NULL
      */
     public function findOneById($identifyer) : ?UnglinUser ;
+
+    /**
+     * Delete
+     *
+     * This method delete a user instance.
+     *
+     * @param UnglinRole $user The user to delete
+     *
+     * @return void
+     */
+    public function delete(UnglinUser $user) : void ;
 }

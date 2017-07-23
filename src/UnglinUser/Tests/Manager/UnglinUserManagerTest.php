@@ -166,4 +166,35 @@ class UnglinUserManagerTest extends TestCase
 
         $this->assertNull($instance->loadById('123'));
     }
+
+    /**
+     * Test delete
+     *
+     * This method validate the delete method of the UnglinUserManager instance
+     *
+     * @return void
+     */
+    public function testDelete()
+    {
+        $logger = $this->createMock(LoggerInterface::class);
+        $mapper = $this->createMock(UnglinUserMapperInterface::class);
+
+        $instance = new UnglinUserManager($mapper, $logger);
+
+        $role = $this->createMock(UnglinUser::class);
+
+        $role->expects($this->once())
+            ->method('getId')
+            ->willReturn('123');
+
+        $logger->expects($this->once())
+            ->method('debug')
+            ->with($this->stringEndsWith('"123"'));
+
+        $mapper->expects($this->once())
+            ->method('delete')
+            ->with($this->identicalTo($role));
+
+        $this->assertNull($instance->delete($role));
+    }
 }

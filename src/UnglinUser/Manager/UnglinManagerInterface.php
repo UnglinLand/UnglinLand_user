@@ -58,4 +58,15 @@ interface UnglinManagerInterface
      * @return mixed|NULL
      */
     public function loadById($identifyer);
+
+    /**
+     * Delete
+     *
+     * This method remove a managed instance from the storage
+     *
+     * @param mixed $instance The instance to remove
+     *
+     * @return void
+     */
+    public function delete($instance) : void ;
 }

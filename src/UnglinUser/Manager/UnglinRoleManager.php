@@ -132,4 +132,23 @@ class UnglinRoleManager implements UnglinManagerInterface
 
         return $role;
     }
+
+    /**
+     * Delete
+     *
+     * This method remove a managed instance from the storage
+     *
+     * @param mixed $instance The instance to remove
+     *
+     * @return void
+     */
+    public function delete($instance) : void
+    {
+        $identifyer = $instance instanceof UnglinRole ? $instance->getId() : '';
+
+        $this->logger->debug(sprintf('Deleting role with identifyer "%s"', $identifyer));
+
+        $this->roleMapper->delete($instance);
+        return;
+    }
 }

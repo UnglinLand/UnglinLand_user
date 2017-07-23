@@ -132,4 +132,23 @@ class UnglinUserManager implements UnglinManagerInterface
 
         return $user;
     }
+
+    /**
+     * Delete
+     *
+     * This method remove a managed instance from the storage
+     *
+     * @param mixed $instance The instance to remove
+     *
+     * @return void
+     */
+    public function delete($instance) : void
+    {
+        $identifyer = $instance instanceof UnglinUser ? $instance->getId() : '';
+
+        $this->logger->debug(sprintf('Deleting user with identifyer "%s"', $identifyer));
+
+        $this->userMapper->delete($instance);
+        return;
+    }
 }

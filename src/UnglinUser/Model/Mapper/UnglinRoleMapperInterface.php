@@ -63,4 +63,15 @@ interface UnglinRoleMapperInterface
      * @return UnglinRole|NULL
      */
     public function findOneById($identifyer) : ?UnglinRole ;
+
+    /**
+     * Delete
+     *
+     * This method delete a role instance.
+     *
+     * @param UnglinRole $role The role to delete
+     *
+     * @return void
+     */
+    public function delete(UnglinRole $role) : void ;
 }

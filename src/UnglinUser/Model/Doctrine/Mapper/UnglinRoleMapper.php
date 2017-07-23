@@ -111,4 +111,19 @@ class UnglinRoleMapper implements UnglinRoleMapperInterface
         $this->manager->persist($role);
         return;
     }
+
+    /**
+     * Delete
+     *
+     * This method delete a role instance.
+     *
+     * @param UnglinRole $role The role to delete
+     *
+     * @return void
+     */
+    public function delete(UnglinRole $role) : void
+    {
+        $this->manager->remove($role);
+        return;
+    }
 }
