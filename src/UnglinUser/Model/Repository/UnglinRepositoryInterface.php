@@ -15,12 +15,10 @@
  */
 namespace UnglinLand\UserModule\Model\Repository;
 
-use UnglinLand\UserModule\Model\UnglinUser;
-
 /**
- * UnglinUser repository
+ * Unglin repository
  *
- * This interface define the base UnglinUser repository methods
+ * This interface define the base Unglin entity repository methods
  *
  * @category Model
  * @package  UnglinLand-user
@@ -28,6 +26,16 @@ use UnglinLand\UserModule\Model\UnglinUser;
  * @license  MIT <https://opensource.org/licenses/MIT>
  * @link     http://cscfa.fr
  */
-interface UnglinUserRepositoryInterface extends UnglinRepositoryInterface
+interface UnglinRepositoryInterface
 {
+    /**
+     * Find one by id
+     *
+     * This method return a Unglin entity accordingly with the given id
+     *
+     * @param mixed $id The id of the searched Unglin entity
+     *
+     * @return object|NULL
+     */
+    public function findOneById($id);
 }

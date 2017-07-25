@@ -28,16 +28,6 @@ use UnglinLand\UserModule\Model\UnglinRole;
  * @license  MIT <https://opensource.org/licenses/MIT>
  * @link     http://cscfa.fr
  */
-interface UnglinRoleRepositoryInterface
+interface UnglinRoleRepositoryInterface extends UnglinRepositoryInterface
 {
-    /**
-     * Find one by id
-     *
-     * This method return a UnglinRole accordingly with the given id
-     *
-     * @param mixed $id The id of the searched UnglinRole
-     *
-     * @return UnglinRole|NULL
-     */
-    public function findOneById($id) : ?UnglinRole;
 }
