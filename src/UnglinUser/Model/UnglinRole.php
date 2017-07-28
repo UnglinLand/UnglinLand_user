@@ -26,8 +26,10 @@ namespace UnglinLand\UserModule\Model;
  * @license  MIT <https://opensource.org/licenses/MIT>
  * @link     http://cscfa.fr
  */
-class UnglinRole
+class UnglinRole implements EntityVersionControlInterface
 {
+    use EntityVersionControlTrait;
+
     /**
      * Id
      *

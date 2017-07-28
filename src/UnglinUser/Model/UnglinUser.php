@@ -28,8 +28,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @license  MIT <https://opensource.org/licenses/MIT>
  * @link     http://cscfa.fr
  */
-class UnglinUser implements UserInterface
+class UnglinUser implements UserInterface, EntityVersionControlInterface
 {
+    use EntityVersionControlTrait;
+
     /**
      * Id
      *

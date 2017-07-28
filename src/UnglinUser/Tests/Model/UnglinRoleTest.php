@@ -17,6 +17,7 @@ namespace UnglinLand\UserModule\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
 use UnglinLand\UserModule\Model\UnglinRole;
+use UnglinLand\UserModule\Model\EntityVersionControlInterface;
 
 /**
  * UnglinRole test
@@ -31,6 +32,8 @@ use UnglinLand\UserModule\Model\UnglinRole;
  */
 class UnglinRoleTest extends TestCase
 {
+    use EntityVersionControlTraitTest;
+
     /**
      * Instance
      *
@@ -101,5 +104,29 @@ class UnglinRoleTest extends TestCase
         $labelProperty->setValue($this->instance, $label);
 
         $this->assertEquals($label, $this->instance->getLabel());
+    }
+
+    /**
+     * Get instance
+     *
+     * This method return an instance to be validated
+     *
+     * @return EntityVersionControlInterface
+     */
+    protected function getInstance() : EntityVersionControlInterface
+    {
+        return $this->instance;
+    }
+
+    /**
+     * Get test case
+     *
+     * This method return a TestCase instance to validate the EntityVersionControlTrait
+     *
+     * @return TestCase
+     */
+    protected function getTestCase() : TestCase
+    {
+        return $this;
     }
 }
