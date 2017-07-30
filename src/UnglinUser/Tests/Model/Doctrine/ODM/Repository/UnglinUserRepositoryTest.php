@@ -22,6 +22,7 @@ use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
 use Doctrine\ODM\MongoDB\Persisters\DocumentPersister;
 use UnglinLand\UserModule\Model\UnglinUser;
 use UnglinLand\UserModule\Model\Doctrine\ODM\Repository\UnglinUserRepository;
+use UnglinLand\UserModule\Tests\Model\VersionControlRepoTraitTest;
 
 /**
  * UnglinUserRepository test
@@ -36,6 +37,8 @@ use UnglinLand\UserModule\Model\Doctrine\ODM\Repository\UnglinUserRepository;
  */
 class UnglinUserRepositoryTest extends TestCase
 {
+    use VersionControlRepoTraitTest;
+
     /**
      * Test findOneById
      *
@@ -64,5 +67,29 @@ class UnglinUserRepositoryTest extends TestCase
         $instance = new UnglinUserRepository($documentManager, $unitOfWork, $metadata);
 
         $instance->findOneById(123);
+    }
+
+    /**
+     * Get test case
+     *
+     * This method return a test case instance to process the tests.
+     *
+     * @return TestCase
+     */
+    protected function getTestCase() : TestCase
+    {
+        return $this;
+    }
+
+    /**
+     * Get tested instance
+     *
+     * This method return an instance to be validated
+     *
+     * @return string
+     */
+    protected function getTestedInstanceClass() : string
+    {
+        return UnglinUserRepository::class;
     }
 }

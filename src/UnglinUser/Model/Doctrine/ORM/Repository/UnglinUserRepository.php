@@ -18,6 +18,8 @@ namespace UnglinLand\UserModule\Model\Doctrine\ORM\Repository;
 use UnglinLand\UserModule\Model\Repository\UnglinUserRepositoryInterface;
 use Doctrine\ORM\EntityRepository;
 use UnglinLand\UserModule\Model\UnglinUser;
+use UnglinLand\UserModule\Model\Repository\VersionControlRepositoryTrait;
+use Doctrine\Common\Persistence\ObjectRepository;
 
 /**
  * UnglinUser repository
@@ -32,6 +34,8 @@ use UnglinLand\UserModule\Model\UnglinUser;
  */
 class UnglinUserRepository extends EntityRepository implements UnglinUserRepositoryInterface
 {
+    use VersionControlRepositoryTrait;
+
     /**
      * Find one by id
      *
@@ -44,5 +48,17 @@ class UnglinUserRepository extends EntityRepository implements UnglinUserReposit
     public function findOneById($id) : ?UnglinUser
     {
         return $this->findOneBy(['id' => $id]);
+    }
+
+    /**
+     * Get repository
+     *
+     * This method return a repository instance to perform the requests.
+     *
+     * @return ObjectRepository
+     */
+    protected function getRepository() : ObjectRepository
+    {
+        return $this;
     }
 }

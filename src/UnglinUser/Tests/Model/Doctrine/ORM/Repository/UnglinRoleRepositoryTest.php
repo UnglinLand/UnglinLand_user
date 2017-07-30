@@ -22,6 +22,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\UnitOfWork;
 use UnglinLand\UserModule\Model\UnglinRole;
 use Doctrine\ORM\Persisters\Entity\EntityPersister;
+use UnglinLand\UserModule\Tests\Model\VersionControlRepoTraitTest;
 
 /**
  * UnglinRoleRepository test
@@ -36,6 +37,8 @@ use Doctrine\ORM\Persisters\Entity\EntityPersister;
  */
 class UnglinRoleRepositoryTest extends TestCase
 {
+    use VersionControlRepoTraitTest;
+
     /**
      * Test findOneById
      *
@@ -68,5 +71,29 @@ class UnglinRoleRepositoryTest extends TestCase
         $instance = new UnglinRoleRepository($entityManager, $metadata);
 
         $instance->findOneById(123);
+    }
+
+    /**
+     * Get test case
+     *
+     * This method return a test case instance to process the tests.
+     *
+     * @return TestCase
+     */
+    protected function getTestCase() : TestCase
+    {
+        return $this;
+    }
+
+    /**
+     * Get tested instance
+     *
+     * This method return an instance to be validated
+     *
+     * @return string
+     */
+    protected function getTestedInstanceClass() : string
+    {
+        return UnglinRoleRepository::class;
     }
 }

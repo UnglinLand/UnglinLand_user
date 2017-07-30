@@ -18,6 +18,8 @@ namespace UnglinLand\UserModule\Model\Doctrine\ODM\Repository;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 use UnglinLand\UserModule\Model\Repository\UnglinRoleRepositoryInterface;
 use UnglinLand\UserModule\Model\UnglinRole;
+use UnglinLand\UserModule\Model\Repository\VersionControlRepositoryTrait;
+use Doctrine\Common\Persistence\ObjectRepository;
 
 /**
  * UnglinRoleRepository
@@ -32,6 +34,8 @@ use UnglinLand\UserModule\Model\UnglinRole;
  */
 class UnglinRoleRepository extends DocumentRepository implements UnglinRoleRepositoryInterface
 {
+    use VersionControlRepositoryTrait;
+
     /**
      * Find one by id
      *
@@ -44,5 +48,17 @@ class UnglinRoleRepository extends DocumentRepository implements UnglinRoleRepos
     public function findOneById($id) : ?UnglinRole
     {
         return $this->findOneBy(['id' => $id]);
+    }
+
+    /**
+     * Get repository
+     *
+     * This method return a repository instance to perform the requests.
+     *
+     * @return ObjectRepository
+     */
+    protected function getRepository() : ObjectRepository
+    {
+        return $this;
     }
 }

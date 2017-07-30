@@ -22,6 +22,7 @@ use Doctrine\ORM\UnitOfWork;
 use PHPUnit\Framework\TestCase;
 use UnglinLand\UserModule\Model\Doctrine\ORM\Repository\UnglinUserRepository;
 use UnglinLand\UserModule\Model\UnglinUser;
+use UnglinLand\UserModule\Tests\Model\VersionControlRepoTraitTest;
 
 /**
  * UnglinUserRepository test
@@ -36,6 +37,8 @@ use UnglinLand\UserModule\Model\UnglinUser;
  */
 class UnglinUserRepositoryTest extends TestCase
 {
+    use VersionControlRepoTraitTest;
+
     /**
      * Test findOneById
      *
@@ -68,5 +71,29 @@ class UnglinUserRepositoryTest extends TestCase
         $instance = new UnglinUserRepository($entityManager, $metadata);
 
         $instance->findOneById(123);
+    }
+
+    /**
+     * Get test case
+     *
+     * This method return a test case instance to process the tests.
+     *
+     * @return TestCase
+     */
+    protected function getTestCase() : TestCase
+    {
+        return $this;
+    }
+
+    /**
+     * Get tested instance
+     *
+     * This method return an instance to be validated
+     *
+     * @return string
+     */
+    protected function getTestedInstanceClass() : string
+    {
+        return UnglinUserRepository::class;
     }
 }

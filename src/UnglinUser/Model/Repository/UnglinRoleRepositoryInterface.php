@@ -28,6 +28,6 @@ use UnglinLand\UserModule\Model\UnglinRole;
  * @license  MIT <https://opensource.org/licenses/MIT>
  * @link     http://cscfa.fr
  */
-interface UnglinRoleRepositoryInterface extends UnglinRepositoryInterface
+interface UnglinRoleRepositoryInterface extends UnglinRepositoryInterface, VersionControlRepositoryInterface
 {
 }
